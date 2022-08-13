@@ -1,0 +1,72 @@
+{% extends 'mails/base.html' %}
+
+{% block content %}
+    {% load static %}
+
+    <div class="container">
+<hr>
+        <table>
+            <tr>
+                <td width="80%"><h2 style="color: #000">{{ mail.Sub }}</h2></td>
+                <td width="7%">
+                    <a href="{% url 'reply' mail.id %}">
+                        <button class="btn btn-danger" type="button"><i class="fa-solid fa-reply"></i> الرد
+                        </button>
+                    </a>
+                </td>
+                <td width="13%">
+                    {% if attachments %}
+                    <div class="col">
+                        <button class="btn btn-success" type="button" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom"><i
+                                class="fa-solid fa-paperclip"></i> معاينة المرفقات
+                        </button>
+
+                        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom"
+                             aria-labelledby="offcanvasBottomLabel">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="offcanvasBottomLabel" style="color: #212529">
+                                    المرفقات</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body small">
+                                {% for attachment in attachments %}
+
+                                    <a href="../../Attachment{{ attachment.Attachment.url }}" type="button"
+                                       class="btn btn-outline-secondary">
+                                        <img src="../../Attachment{{ attachment.Attachment.url }}" style="height: 100px"
+                                             onerror="this.src='../../img/file.jpg';">
+                                        <br>
+                                        {{ attachment.Attachment }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}</td>
+
+            </tr>
+        </table>
+
+        <hr>
+
+
+
+        <h5 style="color: #000">من : {{ mail.From }}</h5>
+        <h5 style="color: #000">إلى : {{ mail.To }}</h5>
+        <h5 style="color: #000">التاريخ : {{ mail.Date | date:"d M Y - h:m a" }}</h5>
+        <hr>
+
+        <div>{{ mail.Msg | safe }}</div>
+
+        {% if mail.Draft == '1' %}
+            <div class="text-center">
+                <a href="{% url 'send_draft' mail.id %}">
+                    <button class="btn btn-dark mt-2">إرسال</button>
+                </a>
+            </div>
+        {% endif %}
+
+    </div>
+
+{% endblock %}

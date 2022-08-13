@@ -1,0 +1,37 @@
+/* General */
+body {
+    width: 99%
+}
+a {
+    text-decoration: none;
+}
+h1, h2, h3, h4, h5, h5 {
+    color: aliceblue;
+}
+.rs {
+    background-color:#212529;
+}
+.ls {
+    border-radius: 0px 50px 50px 0px;
+    box-shadow: 0px 0px 0px 30px #212529;
+}
+.hcolum:hover {
+    background: #f3c635;
+}
+.django-ckeditor-widget{
+  width: 100%;
+}
+
+.modal-header .btn-close {
+    padding: 0.5rem 0.5rem;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #212529;
+    border-color: #212529;
+}
+.page-link {
+    color: #212529;
+}
